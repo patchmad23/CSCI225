@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang = "en-us">
+
+<head>
+    <title> Contact Me form </title>
+</head>
+
+<p>USC Aiken Virtual Tour</p>
+<p>
+    <!-- video-->
+
+	<iframe width="400" height="250" src="https://www.youtube.com/embed/_MMga99JDxI?si=oINbMgXA6Yq3TUZd" title="Youtube player"></iframe>
+</p>
+
+<form name="feedback">
+
+    <!-- name -->
+    <p>First Name: <input type="text" placeholder="anonymous" name="fname" required></p>
+    <p>Last Name: <input type="text" placeholder="anonymous" name="lname" required></p>
+    
+    <!-- email -->
+    <p> Email: <input type="email" placeholder="name@domain.com" name="mail" ></p>
+
+	<!-- phone number -->
+	<p> Phone number: <input type="tel" placeholder="123-456-7890" pattern="\d{3}-\d{3}-\d{4}" name="tel" required></p>
+
+	<!-- Date -->
+	<p>
+		Date: <input type="date" name="date">
+	</p>
+
+    <!-- recommendation -->
+    <p>Would you recommend your website?</p>
+    <p><input type="radio" name="recommend" value="yes">yes </p>
+    <p><input type="radio" name="recommend" value="no">no </p>
+
+    <!-- favorite website -->
+    <p> Select your favorite website:
+        <select name="website" size="4" multiple>
+            <option value="google">Google</option>
+            <option value="Facebook">Facebook</option>
+            <option value="twitter">Twitter</option>
+            <option value="time">Time</option>
+            <option value="youtube">Youtube</option>
+        </select>
+	
+	<!-- comments -->
+	<p>
+		<textarea name="comment" cols="30" rows="10">No Comments</textarea>
+	</p>
+
+    <!-- rating -->
+    <p> How would you rate this website?: 1<input type="range" name="score" min="0" max="10">10</p>
+	
+    <!-- submit -->
+    <p><input type="submit" value="Submit" formnovalidate></p>
+	<p><input type="reset" value="Clear the form"></p>
+
+</form>
