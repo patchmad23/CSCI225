@@ -1,0 +1,258 @@
+/*Style file created by patrick madura
+======================================
+00: CSS variables
+01: Color
+02: Typography
+03: Layout
+04: Style and format
+05: Animation
+*/
+
+html, body{
+    height: 100%;
+}
+body{
+    overflow: auto;
+}
+/* 00: CSS variables */
+:root{
+    --page-color: hsla(0, 100%, 50%, 0.989);
+    --body-color: hsla(244, 99%, 51%, 0.9);
+    --table-color: hsla(244, 99%, 51%, 0.65);
+    --footbar-color: white;
+    --tab-color: hsla(7, 79%, 50%, 0.9);
+    --footbar-heigth: 15vh;
+
+}
+
+/* 01: Color */
+html{
+    background-color: var(--page-color);
+    padding: 15px;
+}
+section.intro{
+    background-image: linear-gradient(blue, gray, white);
+}
+section.photo{
+    background-color: var(--body-color);
+    width: 300px;
+
+}
+#main-navbar{
+    background-color: white;
+}
+div.assignment{
+    background-color: white;
+    width: 200px;
+    height: auto;
+}
+div.contact{
+    background-color: white;
+    width: 250px;
+    
+}
+
+div.schedule{
+    background-color: var(--body-color);
+    padding: 0.75%;
+}
+/* 02: Typography */
+
+h1{
+    font-family: 'Black Ops One', cursive;
+    font-size: 1.5em;
+    color: black;
+    font-weight: 450;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    line-height: 1.15em;
+    text-align: center;
+}
+
+section.intro{
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.5em;
+    text-align: center;
+    color: white;
+}
+div.contact{
+    text-align: center;
+}
+div.navbar{
+    text-align: left;
+    
+}
+div.schedule{
+    text-align: center;
+}
+/* 03: Layout */
+/*div.navbar, div.introduction, div.portfolio, div.contact, div.schedule{
+    transition: all 5s ease-in-out;
+}*/
+div.navbar{
+    position: fixed;
+    left: 7.5%;
+    width: 550px;
+    border-top-right-radius: 150px;
+    border-top-left-radius: 150px;
+    border-bottom-left-radius: 150px;
+    border-bottom-right-radius: 150px;
+}
+div.introduction{
+    position: fixed;
+    left: 45.5%;
+    top: 15vh;
+    margin: 10px;
+
+}
+
+section.intro{
+    position: fixed;
+    left: 15vw;
+    height: 60%;
+    width: 40%;
+    padding: 0.5%;
+}
+
+section.photo{
+    position: fixed;
+    right: 35vh;
+    top: 12%;
+    /*max-width: 10%;
+    max-height: auto;*/
+    padding: 0.75%;
+    border-top-right-radius: 55px;
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 55px;
+    border-bottom-right-radius: 50px;
+}
+
+div.assignment{
+    position: absolute;
+    top: 20%;
+    right: 1.5%;
+    width: 275px;
+}
+div.portfolio{
+    position: absolute;
+    top: 50%;
+    left: 46.5%;
+    box-shadow: 12px 10px var(--body-color);
+}
+div.contact{
+    position: fixed;
+    top: 1%;
+    right: 1%;
+}
+div.schedule{
+    position: absolute;
+    top: 57%;
+    left: 37.5%;
+}
+
+footer{
+    position: fixed;
+    bottom: 0;
+    right: 5%;
+    width: 20%;
+    text-align: center;
+    background-color: var(--footbar-color);
+    border: 1px solid var(--footbar-color);
+    z-index: 3;
+}
+
+div.portfolio, div.contact, div.schedule{
+    border-bottom: 3px;
+    border-right: 3px;
+    background-color: white;
+}
+
+
+/* 04: Style and format */
+/* navbar displayed without list  */
+div.navbar h3{
+    display: none;
+}
+
+div.navbar li{
+    margin: 5%;
+    display: inline;;
+}
+/* link style */
+a:link{
+    text-decoration: none;
+}
+a:hover{
+    color: pink;
+}
+a:visited{
+    color: orangered;
+}
+a:active{
+    color: blue;
+}
+
+p::first-letter{
+    font-size: 1.5em;
+    font-style: italic;
+}
+
+h1:hover{
+    transform: scale(2);
+    transition: all 4s ease-in-out; 
+}
+
+/*div.schedule p{
+    box-shadow: 12px 10px gray;
+}*/
+
+h1{
+    background-image: linear-gradient(blue,white,red);
+    border: 1px;
+}
+
+footer{
+    background-image: linear-gradient(blue, white);
+}
+
+/* table color */
+table{
+    border: 1px solid red;
+    padding: 3%;
+    vertical-align: center;
+    empty-cells: hide;
+}
+
+tr.even{
+    background-color: var(--table-color);
+}
+
+/* 05: Animation */
+/* change footer gradient */
+footer{
+    animation: 7s infinite running changecolor;
+
+}
+@keyframes changecolor{
+    from{background-image: linear-gradient(white, blue)}
+    to{background-image: linear-gradient(blue,white)}
+}
+section.photo{
+    animation: 10s infinite running spin;
+}
+@keyframes spin{
+    from{transform: rotate(45deg)}
+    25%{transform: rotate(0deg)}
+    50%{transform: rotate(-45deg)}
+
+    to{transform: rotate(45deg);}
+}
+/* transition background color */
+div.introduction{
+    animation: 5s infinite running changebackground;
+}
+@keyframes changebackground{
+    from{background-color: var(--body-color)}
+    to{background-color: white}
+}
+

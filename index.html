@@ -1,10 +1,22 @@
 <!DOCTYPE html>
 <html lang = "en-us">
 
+<!--<style>
+    img{
+        max-height: 50%;
+        width: auto;
+    }
+</style>
+-->
 <head>
     <title>CSCI225 Homepage of Patrick Madura </title>
+    <link rel="stylesheet" href="css/home.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
 </head>
-    <div class="navbar">
+<body>
+    
+    <div class="navbar" id="main-navbar">
         <ul>
             <li>
                 <a href="https://www.usca.edu/"> USCA Main Website</a>
@@ -21,16 +33,20 @@
         <h1>
             Introduction
         </h1>
+        <section class="intro" id="intro">
         <p>
             I am Patrick Madura, and I am a mechanical engineering major with a minor in computer science. I have always liked to tinker and build things
             Some of my favorite things to do are play video games and watch anime and baseball. I am a huge Atlanta Braves fan, and one of my favorite moments
             was being able to go to game 3 of the 2021 World Series. Some of my favorite video games are Call of Duty, Fortnite, Apex, Kingdom Hearts, and Pokemon. 
             My favorite anime are My Hero Academia, One Piece, Naruto, and Attack on Titan.
         </p>
+        </section>
+        <section class="photo" id="photo">
         <p>
-            <img src="img/2021WSG3Ticket.jpg" alt="World Series Ticket">
+            <img src="img/2021WSG3Ticket.jpg" alt="World Series Ticket" width="300" height="300">
         </p>
-        
+        </section>
+
     </div>
     <div class="assignment">    
         <h1 id="assignments">
@@ -51,13 +67,15 @@
             Portfolio
         </h1>
         <!--  I currently do not have anything to add to the portfolio section.  --> 
-        <h2 id="contact">
-            Contact Information
-        </h2>
-        <p><a href="mailto:pmadura@usca.edu">pmadura@usca.edu</a></p>
+        
         
     </div>
-
+    <div class="contact">
+        <h1 id="contact">
+            Contact Information
+        </h1>
+        <p><a href="mailto:pmadura@usca.edu">pmadura@usca.edu</a></p>
+    </div>
     <div class="schedule">
         <h1>
             Schedule
@@ -86,7 +104,7 @@
                 <td></td>
                 <td></td>
             </tr>
-            <tr>
+            <tr class="even">
                 <td>1:00-2:00</td>
                 <td rowspan="2">
                     <p><strong>ENCP 361</strong></p>
@@ -108,7 +126,7 @@
                 <td></td>
                 <td></td>
             </tr>
-            <tr>
+            <tr class="even">
                 <td>3:00-4:00</td>
                 <td></td>
                 <td rowspan="3">
@@ -128,7 +146,7 @@
                 <td></td>
 
             </tr>
-            <tr>
+            <tr class="even">
                 <td>5:00-6:00</td>
                 <td rowspan="2">
                     <p><strong>ENCP 360</strong></p>
@@ -146,6 +164,6 @@
         </table>
         
     </div>
-
+</body>
 <footer>&copy;Patrick Madura</footer>
 </html>
