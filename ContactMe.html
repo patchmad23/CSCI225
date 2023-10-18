@@ -20,7 +20,7 @@
                         <li class="nav-item"><a class="nav-link text-white" href="#assignments">Assignments</a></li>
                         <li class="nav-item"><a class="nav-link text-white" href="#contact">Contact Information</a></li>
                         <!--github link-->
-                        <li><a href=""></a></li>
+                        <!--li><a href=""></a></li-->
                     </ul>
                 </div>
             </div>
@@ -74,15 +74,17 @@
                         <p><!--label class="form-check-label"--> <input type="radio" class="form-check-input" name="recommend" value="no">no <!--/label--></p>
                     </div>
                     <!-- favorite website -->
-                    <p> Select your favorite website:
-                        <select name="website" size="4" multiple>
-                            <option value="google">Google</option>
-                            <option value="Facebook">Facebook</option>
-                            <option value="twitter">Twitter</option>
-                            <option value="time">Time</option>
-                            <option value="youtube">Youtube</option>
-                        </select>
-                    </p>
+                    <div class="input-group mb-3">
+                        <label class="input-group-text" for="favorite"> Select your favorite website: </label>
+                            <select class="form-select" id="favorite" name="website" size="4" multiple>
+                                <option value="google">Google</option>
+                                <option value="Facebook">Facebook</option>
+                                <option value="twitter">Twitter</option>
+                                <option value="time">Time</option>
+                                <option value="youtube">Youtube</option>
+                            </select>
+                        
+                    </div>  
                     <!-- comments -->
                     <div class="form-group">
                         <p>
