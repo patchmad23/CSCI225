@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!--<link rel="stylesheet" href="">-->
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+    integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+
+    <style>
+        .inputData{
+            border: 5px outset blue;
+            text-align: center;
+            padding: 2%;
+            position: absolute;
+            left: 1vw;
+            width: 40%;
+        }
+
+        .details{
+            border: 5px outset blue;
+            text-align: center;
+            padding: 2%;
+            position: absolute;
+            right: 1vw;
+            width: 40%;
+        }
+    </style>
+</head>
+
+<body>
+    <!--
+        <p> </p>
+    -->
+
+    <div class="inputData">
+
+        <h1>Georgia Power Bill Calculator</h1>
+        <p>
+            The utility bill calculator is a resource that the Commision is making available that allows a consumer to check the accuracy of his/her monthly electric bill. 
+            A bill calculator has been prepared for customers of the Georgia Power Company. This bill calculator applies only to residential customers who are receiving 
+            service under the standard Residential Tariff (R-27). For more details regarding Georgia Power's Residential Tariff offerings, please visit Georgia Power Pricing & Rates.
+        </p>
+        <p>
+            Effective August 2023
+        </p>
+        <form id="myBill">
+            <p>
+                Enter your Monthly Usage in kilowatt hours (kWh): 
+                <input type="text" name="monthly" id="month">
+            </p>
+            <p>
+                Enter the number of days for you current billing period:
+                <input type="text" name="billing" id="numDays">
+            </p>
+            <p>
+                Is your residence INSIDE the city limits of your city?
+                <input class="message" type="checkbox" value="isInside" id="inside">
+            </p>
+            <p>
+                Is this a Summer month (June - September)?
+                <input class="message" type="checkbox" value="isSummer" id="summer">
+            </p>
+            <p>
+                Enter Sales Tax(%):
+                <input type="text" id="tax">
+            </p>
+            
+
+
+       <!--     
+
+            <script>
+                document.title = "Georgia Power Bill Calculator";
+                
+                //get usage input
+                var usage = parseFloat(document.getElementById("month").value);
+                var days = parseFloat(document.getElementById("numDays").value);
+                var salesTax = parseFloat(document.getElementById("tax").value);
+
+                var baseCharge;
+                var tier1;
+                var tier2;
+                var tier3;
+                var baseRev;
+
+                //calculate bill
+
+                function calculateBill() {
+
+                    var days = parseFloat(document.getElementById("numDays").value);
+                    var usage = parseFloat(document.getElementById("month").value);
+                    var salesTax = parseFloat(document.getElementById("tax").value);
+
+                    var base = 0.4603;
+                    baseCharge = days * base;
+                    console.log(baseCharge)
+
+                    document.getElementById("baseTot").textContent = baseCharge.toFixed(2);
+
+                    var st1 = 0.066678;
+                    var st2 = 0.110748;
+                    var st3 = 0.114625;
+                    var wt1 = 0.062404;
+                    //var wt2 =  ;
+                    //var wt3 =  ;
+
+                    var fuelCost;
+                    var fuelBaseS = 0.045876;
+                    var fuelBaseW = 0.042859;
+
+                    var summerCheck = document.getElementById("summer").checked;
+                    console.log(summerCheck);
+
+                    //summer rates
+                    if (summerCheck == true){
+                        if (usage < 651){
+                            tier1 = 650 * st1;
+                            tier2 = 0;
+                            tier3 = 0;
+
+                        }
+                        else if(usage < 1001 && usage > 650){
+                            tier1 = 650 * st1;
+                            tier2 = (usage - 650) * st2;
+                            tier3 = 0;
+                        }
+                        else{
+                            tier1 = 650 * st1;
+                            tier2 = 1000 * st2;
+                            tier3 = (usage - 1000) * st3;
+                        }
+
+                        fuelCost = usage * fuelBaseS;
+                    }
+                    //winter rates
+                    else{
+                        if (usage < 651){
+                            tier1 = 650 * wt1;
+                            tier2 = 0;
+                            tier3 = 0;
+                        }
+                        else if(usage < 1001 && usage > 650){
+                            tier1 = 650 * wt1;
+                            tier2 = (usage - 650) * wt1;
+                            tier3 = 0;
+                        }
+                        else{
+                            tier1 = 650 * wt1;
+                            tier2 = 1000 * wt1;
+                            tier3 = (usage - 1000) * wt1;
+                        }
+                        fuelCost = usage * fuelBaseW;
+                    }
+
+                    console.log(tier1);
+                    console.log(tier2);
+                    console.log(tier3);
+                    console.log(fuelCost);
+
+                    baseRev = (baseCharge + tier1 + tier2 + tier3);
+                    console.log(baseRev);
+
+
+
+                    var resCost = baseRev * (1.5989/100);
+                    console.log(resCost);
+                    var nuclearCost = baseRev * (4.1562/100);
+                    console.log(nuclearCost);
+                    var enviroCost = baseRev * (16.2813/100);
+                    console.log(enviroCost);
+                    var rev2 = baseRev + resCost + fuelCost + nuclearCost + enviroCost;
+                    console.log(rev2);
+
+                    var insideCheck = document.getElementById("inside").checked;
+                    console.log(insideCheck);
+
+                    if (insideCheck == true){
+                        var franchiseFee = rev2 * (3.0674/100);
+                    }
+                    else {
+                        var franchiseFee = rev2 * (1.1839/100);
+                    }
+
+                    var totNoTax = rev2 + franchiseFee;
+                    console.log(franchiseFee, totNoTax);
+
+                    var totTax = totNoTax + (totNoTax * (salesTax/100)); 
+                    
+                    document.getElementById("t1Tot").textContent = tier1.toFixed(2);
+                    document.getElementById("t2Tot").textContent = tier2.toFixed(2);
+                    document.getElementById("t3Tot").textContent = tier3.toFixed(2);
+                    document.getElementById("baseSub").textContent = baseRev.toFixed(2);
+                    document.getElementById("fuelCost").textContent = fuelCost.toFixed(2);
+                    document.getElementById("residential").textContent = resCost.toFixed(2);
+                    document.getElementById("nuclear").textContent = nuclearCost.toFixed(2);
+                    document.getElementById("environmental").textContent = enviroCost.toFixed(2);
+                    document.getElementById("serviceRev").textContent = rev2.toFixed(2);
+                    document.getElementById("franchise").textContent = franchiseFee.toFixed(2);
+                    document.getElementById("total").textContent = totNoTax.toFixed(2);
+                    document.getElementById("taxTotal").textContent = totTax.toFixed(2);
+                }
+
+
+
+
+            </script>
+-->
+            <p>
+                <input type="button" value="Submit" onclick="calculateBill();">
+                <input type="reset" value="Reset">
+            </p>
+        </form>
+        <!--
+        <table style="width:50%">
+            <tr> <td> <b>Items</b> </td> <td> <b>Fees</b> </td> </tr>
+            <tr> <td> Base Charge: </td> <td> <label id="baseTot"> 0 </label> </td> </tr>
+            <tr> <td> Tier 1 Component (kWh): </td> <td> <label id="t1Tot"> 0 </label> </td> </tr>
+            <tr> <td> Tier 2 Component (kWh): </td> <td> <label id="t2Tot"> 0 </label> </td> </tr>
+            <tr> <td> Tier 3 Component (kWh): </td> <td> <label id="t3Tot"> 0 </label> </td> </tr>
+            <tr> <td> <b>Base Revenue--Base Bill Subtotal:</b> </td> <td> <label id="baseSub"> 0 </label> </td> </tr>
+            <tr> <td> Fuel Cost Rider: </td> <td> <label id="fuelCost"> 0 </label> </td> </tr>
+            <tr> <td> Demand Side Management Residential Rider: </td> <td> <label id="residential"> 0 </label> </td> </tr>
+            <tr> <td> Nuclear Construction Cost Recovery Rider: </td> <td> <label id="nuclear"> 0 </label> </td> </tr>
+            <tr> <td> Environmental Compliance Cost Recovery Rider: </td> <td> <label id="environmental"> 0 </label> </td> </tr>
+            <tr> <td> <b>Total Revenue -- Current Service Subtotal:</b> </td> <td> <label id="serviceRev"> 0 </label> </td> </tr>
+            <tr> <td> Franchise Fee: </td> <td> <label id="franchise"> 0 </label> </td> </tr>
+            <tr> <td> <b>Total (excludiing tax):</b> </td> <td> <label id="total"> 0 </label> </td> </tr>
+            <tr> <td> <b>Total (w/tax):</b> </td> <td> <label id="taxTotal"> 0 </label> </td> </tr>
+        </table>
+    -->
+    </div>
+
+    <div class="details">
+
+        <table style="width:75%">
+            <tr> <td> <b>Items</b> </td> <td> <b>Fees</b> </td> </tr>
+            <tr> <td> Base Charge: </td> <td> <label id="baseTot"> 0 </label> </td> </tr>
+            <tr> <td> Tier 1 Component (kWh): </td> <td> <label id="t1Tot"> 0 </label> </td> </tr>
+            <tr> <td> Tier 2 Component (kWh): </td> <td> <label id="t2Tot"> 0 </label> </td> </tr>
+            <tr> <td> Tier 3 Component (kWh): </td> <td> <label id="t3Tot"> 0 </label> </td> </tr>
+            <tr> <td> <b>Base Revenue--Base Bill Subtotal:</b> </td> <td> <label id="baseSub"> 0 </label> </td> </tr>
+            <tr> <td> Fuel Cost Rider: </td> <td> <label id="fuelCost"> 0 </label> </td> </tr>
+            <tr> <td> Demand Side Management Residential Rider: </td> <td> <label id="residential"> 0 </label> </td> </tr>
+            <tr> <td> Nuclear Construction Cost Recovery Rider: </td> <td> <label id="nuclear"> 0 </label> </td> </tr>
+            <tr> <td> Environmental Compliance Cost Recovery Rider: </td> <td> <label id="environmental"> 0 </label> </td> </tr>
+            <tr> <td> <b>Total Revenue -- Current Service Subtotal:</b> </td> <td> <label id="serviceRev"> 0 </label> </td> </tr>
+            <tr> <td> Franchise Fee: </td> <td> <label id="franchise"> 0 </label> </td> </tr>
+            <tr> <td> <b>Total (excludiing tax):</b> </td> <td> <label id="total"> 0 </label> </td> </tr>
+            <tr> <td> <b>Total (w/tax):</b> </td> <td> <label id="taxTotal"> 0 </label> </td> </tr>
+        </table>
+
+    </div>
+
+
+    <script>
+        document.title = "Georgia Power Bill Calculator";
+        
+        //get usage input
+        var usage = parseFloat(document.getElementById("month").value);
+        var days = parseFloat(document.getElementById("numDays").value);
+        var salesTax = parseFloat(document.getElementById("tax").value);
+
+        var baseCharge;
+        var tier1;
+        var tier2;
+        var tier3;
+        var baseRev;
+
+        //calculate bill
+
+        function calculateBill() {
+
+            var days = parseFloat(document.getElementById("numDays").value);
+            var usage = parseFloat(document.getElementById("month").value);
+            var salesTax = parseFloat(document.getElementById("tax").value);
+
+            var base = 0.4603;
+            baseCharge = days * base;
+            console.log(baseCharge)
+
+            document.getElementById("baseTot").textContent = baseCharge.toFixed(2);
+
+            var st1 = 0.066678;
+            var st2 = 0.110748;
+            var st3 = 0.114625;
+            var wt1 = 0.062404;
+            //var wt2 =  ;
+            //var wt3 =  ;
+
+            var fuelCost;
+            var fuelBaseS = 0.045876;
+            var fuelBaseW = 0.042859;
+
+            var summerCheck = document.getElementById("summer").checked;
+            console.log(summerCheck);
+
+            //summer rates
+            if (summerCheck == true){
+                if (usage < 651){
+                    tier1 = 650 * st1;
+                    tier2 = 0;
+                    tier3 = 0;
+
+                }
+                else if(usage < 1001 && usage > 650){
+                    tier1 = 650 * st1;
+                    tier2 = (usage - 650) * st2;
+                    tier3 = 0;
+                }
+                else{
+                    tier1 = 650 * st1;
+                    tier2 = 1000 * st2;
+                    tier3 = (usage - 1000) * st3;
+                }
+
+                fuelCost = usage * fuelBaseS;
+            }
+            //winter rates
+            else{
+                if (usage < 651){
+                    tier1 = 650 * wt1;
+                    tier2 = 0;
+                    tier3 = 0;
+                }
+                else if(usage < 1001 && usage > 650){
+                    tier1 = 650 * wt1;
+                    tier2 = (usage - 650) * wt1;
+                    tier3 = 0;
+                }
+                else{
+                    tier1 = 650 * wt1;
+                    tier2 = 1000 * wt1;
+                    tier3 = (usage - 1000) * wt1;
+                }
+                fuelCost = usage * fuelBaseW;
+            }
+
+            console.log(tier1);
+            console.log(tier2);
+            console.log(tier3);
+            console.log(fuelCost);
+
+            baseRev = (baseCharge + tier1 + tier2 + tier3);
+            console.log(baseRev);
+
+
+
+            var resCost = baseRev * (1.5989/100);
+            console.log(resCost);
+            var nuclearCost = baseRev * (4.1562/100);
+            console.log(nuclearCost);
+            var enviroCost = baseRev * (16.2813/100);
+            console.log(enviroCost);
+            var rev2 = baseRev + resCost + fuelCost + nuclearCost + enviroCost;
+            console.log(rev2);
+
+            var insideCheck = document.getElementById("inside").checked;
+            console.log(insideCheck);
+
+            if (insideCheck == true){
+                var franchiseFee = rev2 * (3.0674/100);
+            }
+            else {
+                var franchiseFee = rev2 * (1.1839/100);
+            }
+
+            var totNoTax = rev2 + franchiseFee;
+            console.log(franchiseFee, totNoTax);
+
+            var totTax = totNoTax + (totNoTax * (salesTax/100)); 
+
+            if (totTax > 500){
+                window.open("https://www.georgiapower.com/residential/save-money-and-energy/products-programs.html");
+            }
+            
+            document.getElementById("t1Tot").textContent = tier1.toFixed(2);
+            document.getElementById("t2Tot").textContent = tier2.toFixed(2);
+            document.getElementById("t3Tot").textContent = tier3.toFixed(2);
+            document.getElementById("baseSub").textContent = baseRev.toFixed(2);
+            document.getElementById("fuelCost").textContent = fuelCost.toFixed(2);
+            document.getElementById("residential").textContent = resCost.toFixed(2);
+            document.getElementById("nuclear").textContent = nuclearCost.toFixed(2);
+            document.getElementById("environmental").textContent = enviroCost.toFixed(2);
+            document.getElementById("serviceRev").textContent = rev2.toFixed(2);
+            document.getElementById("franchise").textContent = franchiseFee.toFixed(2);
+            document.getElementById("total").textContent = totNoTax.toFixed(2);
+            document.getElementById("taxTotal").textContent = totTax.toFixed(2);
+        }
+
+
+
+
+    </script>
+</body>
+
+
+
+</html>
+
+
